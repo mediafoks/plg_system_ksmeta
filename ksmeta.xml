@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>mediafoks@gmail.com</authorEmail>
     <authorUrl></authorUrl>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <description>PLG_SYSTEM_KSMETA_XML_DESCRIPTION</description>
     <namespace path="src">Joomla\Plugin\System\KsMeta</namespace>
     <files>
@@ -139,4 +139,7 @@
             </fieldset>
         </fields>
     </config>
+    <updateservers>
+        <server type="extension" priority="1" name="KS Meta">https://raw.githubusercontent.com/mediafoks/plg_system_ksmeta/main/update.xml</server>
+    </updateservers>
 </extension>
