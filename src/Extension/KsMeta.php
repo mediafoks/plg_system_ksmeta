@@ -245,11 +245,17 @@ class KsMeta extends CMSPlugin implements SubscriberInterface
                     $currentTagParentId = $tag->getItem((int) $currentTagId)[0]->get('parent_id');
                     $excluded_tags = $params->get('excluded_tag');
 
-                    foreach ($excluded_tags as $excluded_tag) {
-                        if ($currentTagId !== $excluded_tag) {
-                            if (in_array($currentTagId, $tagids) || in_array($currentTagParentId, $tagids)) {
-                                $this->renderMeta($params);
+                    if (!empty($excluded_tags)) {
+                        foreach ($excluded_tags as $excluded_tag) {
+                            if ($currentTagId !== $excluded_tag) {
+                                if (in_array($currentTagId, $tagids) || in_array($currentTagParentId, $tagids)) {
+                                    $this->renderMeta($params);
+                                }
                             }
+                        }
+                    } else {
+                        if (in_array($currentTagId, $tagids) || in_array($currentTagParentId, $tagids)) {
+                            $this->renderMeta($params);
                         }
                     }
                 }
@@ -267,13 +273,19 @@ class KsMeta extends CMSPlugin implements SubscriberInterface
                     $currentContactCatId = $contact->getItem($currentContactId)->catid;
                     $excluded_contacts = $params->get('excluded_contacts');
 
-                    foreach ($excluded_contacts as $excluded_contact) {
-                        $excludedContactId = (int) $excluded_contact->id;
+                    if (!empty($excluded_contacts)) {
+                        foreach ($excluded_contacts as $excluded_contact) {
+                            $excludedContactId = (int) $excluded_contact->id;
 
-                        if ($currentContactId !== $excludedContactId) {
-                            if (in_array($currentContactCatId, $catid)) {
-                                $this->renderMeta($params);
+                            if ($currentContactId !== $excludedContactId) {
+                                if (in_array($currentContactCatId, $catid)) {
+                                    $this->renderMeta($params);
+                                }
                             }
+                        }
+                    } else {
+                        if (in_array($currentContactCatId, $catid)) {
+                            $this->renderMeta($params);
                         }
                     }
                 }
