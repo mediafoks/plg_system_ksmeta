@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>PLG_SYSTEM_KSMETA_XML_TITLE</name>
+    <author>Sergey Kuznetsov</author>
+    <creationDate>2024-11-07</creationDate>
+    <copyright>(C) 2024 Sergey Kuznetsov. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail>mediafoks@gmail.com</authorEmail>
+    <authorUrl></authorUrl>
+    <version>1.0.0</version>
+    <description>PLG_SYSTEM_KSMETA_XML_DESCRIPTION</description>
+    <namespace path="src">Joomla\Plugin\System\KsMeta</namespace>
+    <files>
+        <folder plugin="ksmeta">services</folder>
+        <folder>src</folder>
+        <folder>language</folder>
+    </files>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/plg_system_ksmeta.ini</language>
+        <language tag="en-GB">en-GB/plg_system_ksmeta.sys.ini</language>
+        <language tag="ru-RU">ru-RU/plg_system_ksmeta.ini</language>
+        <language tag="ru-RU">ru-RU/plg_system_ksmeta.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="articles_set" label="PLG_SYSTEM_KSMETA_FIELDSET_ARTICLES_LABEL" addfieldprefix="Joomla\Component\Content\Administrator\Field">
+                <field name="articles" type="subform" label="PLG_SYSTEM_KSMETA_FIELD_ARTICLES_LABEL" multiple="true">
+                    <form>
+                        <field name="category_filtering_type" type="list" label="PLG_SYSTEM_KSMETA_FIELD_CAT_FILTERING_TYPE_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_CAT_FILTERING_TYPE_DESC" default="1" filter="integer">
+                            <option value="0">PLG_SYSTEM_KSMETA_OPTION_EXCLUSIVE_VALUE</option>
+                            <option value="1">PLG_SYSTEM_KSMETA_OPTION_INCLUSIVE_VALUE</option>
+                        </field>
+
+                        <field name="catid" type="category" label="JCATEGORY" extension="com_content" multiple="true" layout="joomla.form.field.list-fancy-select" filter="intarray" class="multipleCategories" />
+
+                        <field name="show_child_category_articles" type="list" label="PLG_SYSTEM_KSMETA_FIELD_SHOW_CHILD_CATEGORY_ARTICLES_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_SHOW_CHILD_CATEGORY_ARTICLES_DESC" default="0" filter="integer">
+                            <option value="0">PLG_SYSTEM_KSMETA_OPTION_EXCLUDE_VALUE</option>
+                            <option value="1">PLG_SYSTEM_KSMETA_OPTION_INCLUDE_VALUE</option>
+                        </field>
+
+                        <field name="levels" type="number" label="PLG_SYSTEM_KSMETA_FIELD_CAT_DEPTH_LABEL" default="1" filter="integer" showon="show_child_category_articles:1" />
+
+                        <field name="ex_or_include_articles" type="list" label="PLG_SYSTEM_KSMETA_FIELD_EX_OR_INCLUDE_ARTICLES_LABEL" default="0" filter="integer">
+                            <option value="0">PLG_SYSTEM_KSMETA_OPTION_EXCLUDE_VALUE</option>
+                            <option value="1">PLG_SYSTEM_KSMETA_OPTION_INCLUDE_VALUE</option>
+                        </field>
+
+                        <field name="excluded_articles" type="subform" label="PLG_SYSTEM_KSMETA_FIELD_EXCLUDED_ARTICLES_LABEL" multiple="true" buttons="add,remove" showon="ex_or_include_articles:0">
+                            <form>
+                                <field name="id" type="modal_article" label="PLG_SYSTEM_KSMETA_FIELD_SELECT_ARTICLE_LABEL" select="true" new="false" edit="false" clear="true" />
+                            </form>
+                        </field>
+
+                        <field name="included_articles" type="subform" label="PLG_SYSTEM_KSMETA_FIELD_INCLUDED_ARTICLES_LABEL" multiple="true" buttons="add,remove" showon="ex_or_include_articles:1">
+                            <form>
+                                <field name="id" type="modal_article" label="PLG_SYSTEM_KSMETA_FIELD_SELECT_ARTICLE_LABEL" select="true" new="false" edit="false" clear="true" />
+                            </form>
+                        </field>
+
+                        <field name="title_prefix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_TITLE_PREFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_TITLE_PREFIX_DESC" />
+                        <field name="title_suffix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_TITLE_SUFFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_TITLE_SUFFIX_DESC" />
+                        <field name="description_prefix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_PREFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_PREFIX_DESC" />
+                        <field name="description_suffix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_SUFFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_SUFFIX_DESC" />
+                    </form>
+                </field>
+            </fieldset>
+            <fieldset name="categories_set" label="PLG_SYSTEM_KSMETA_FIELDSET_CATEGORIES_LABEL" addfieldprefix="Joomla\Component\Categories\Administrator\Field">
+                <field name="categories" type="subform" label="PLG_SYSTEM_KSMETA_FIELD_CATEGORIES_LABEL" multiple="true">
+                    <form>
+                        <field name="category_filtering_type" type="list" label="PLG_SYSTEM_KSMETA_FIELD_CAT_FILTERING_TYPE_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_CAT_FILTERING_TYPE_DESC" default="1" filter="integer">
+                            <option value="0">PLG_SYSTEM_KSMETA_OPTION_EXCLUSIVE_VALUE</option>
+                            <option value="1">PLG_SYSTEM_KSMETA_OPTION_INCLUSIVE_VALUE</option>
+                        </field>
+
+                        <field name="catid" type="category" label="JCATEGORY" extension="com_content" multiple="true" layout="joomla.form.field.list-fancy-select" filter="intarray" class="multipleCategories" />
+
+                        <field name="show_child_category_articles" type="list" label="PLG_SYSTEM_KSMETA_FIELD_SHOW_CHILD_CATEGORY_ARTICLES_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_SHOW_CHILD_CATEGORY_ARTICLES_DESC" default="0" filter="integer">
+                            <option value="0">PLG_SYSTEM_KSMETA_OPTION_EXCLUDE_VALUE</option>
+                            <option value="1">PLG_SYSTEM_KSMETA_OPTION_INCLUDE_VALUE</option>
+                        </field>
+
+                        <field name="levels" type="number" label="PLG_SYSTEM_KSMETA_FIELD_CATDEPTH_LABEL" default="1" filter="integer" showon="show_child_category_articles:1" />
+
+                        <field name="ex_or_include_categories" type="list" label="PLG_SYSTEM_KSMETA_FIELD_EX_OR_INCLUDE_CATEGORIES_LABEL" default="0" filter="integer">
+                            <option value="0">PLG_SYSTEM_KSMETA_OPTION_EXCLUDE_VALUE</option>
+                            <option value="1">PLG_SYSTEM_KSMETA_OPTION_INCLUDE_VALUE</option>
+                        </field>
+
+                        <field name="excluded_categories" type="subform" label="PLG_SYSTEM_KSMETA_FIELD_EXCLUDED_CATEGORIES_LABEL" multiple="true" buttons="add,remove" showon="ex_or_include_categories:0">
+                            <form>
+                                <field name="id" type="modal_category" label="PLG_SYSTEM_KSMETA_FIELD_SELECT_CATEGORY_LABEL" select="true" new="false" edit="false" clear="true" />
+                            </form>
+                        </field>
+
+                        <field name="included_categories" type="subform" label="PLG_SYSTEM_KSMETA_FIELD_INCLUDED_CATEGORIES_LABEL" multiple="true" buttons="add,remove" showon="ex_or_include_categories:1">
+                            <form>
+                                <field name="id" type="modal_category" label="PLG_SYSTEM_KSMETA_FIELD_SELECT_CATEGORY_LABEL" select="true" new="false" edit="false" clear="true" />
+                            </form>
+                        </field>
+
+                        <field name="title_prefix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_TITLE_PREFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_TITLE_PREFIX_DESC" />
+                        <field name="title_suffix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_TITLE_SUFFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_TITLE_SUFFIX_DESC" />
+                        <field name="description_prefix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_PREFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_PREFIX_DESC" />
+                        <field name="description_suffix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_SUFFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_SUFFIX_DESC" />
+                    </form>
+                </field>
+            </fieldset>
+            <fieldset name="tags_set" label="PLG_SYSTEM_KSMETA_FIELDSET_TAGS_LABEL">
+                <field name="tags" type="subform" label="PLG_SYSTEM_KSMETA_FIELD_TAGS_LABEL" multiple="true">
+                    <form>
+                        <field name="tag" type="tag" label="JTAG" multiple="true" mode="nested" filter="intarray" custom="false" hint="JOPTION_SELECT_TAG" class="js-select-submit-on-change"/>
+
+                        <field name="excluded_tag" type="tag" label="PLG_SYSTEM_KSMETA_FIELD_EXCLUDED_TAGS_LABEL" multiple="true" mode="nested" filter="intarray" custom="false" hint="JOPTION_SELECT_TAG" class="js-select-submit-on-change" />
+
+                        <field name="title_prefix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_TITLE_PREFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_TITLE_PREFIX_DESC" />
+                        <field name="title_suffix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_TITLE_SUFFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_TITLE_SUFFIX_DESC" />
+                        <field name="description_prefix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_PREFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_PREFIX_DESC" />
+                        <field name="description_suffix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_SUFFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_SUFFIX_DESC" />
+                    </form>
+                </field>
+            </fieldset>
+            <fieldset name="contacts_set" label="PLG_SYSTEM_KSMETA_FIELDSET_CONTACTS_LABEL" addfieldprefix="Joomla\Component\Contact\Administrator\Field">
+                <field name="contacts" type="subform" label="PLG_SYSTEM_KSMETA_FIELD_CONTACTS_LABEL" multiple="true">
+                    <form>
+                        <field name="catid" type="category" label="JCATEGORY" extension="com_contact" multiple="true" layout="joomla.form.field.list-fancy-select" filter="intarray" class="multipleCategories" />
+
+                        <field name="excluded_contacts" type="subform" label="PLG_SYSTEM_KSMETA_FIELD_EXCLUDED_CONTACTS_LABEL" multiple="true" buttons="add,remove">
+                            <form>
+                                <field name="id" type="modal_contact" label="PLG_SYSTEM_KSMETA_FIELD_SELECT_CONTACT_LABEL" select="true" new="false" edit="false" clear="true" />
+                            </form>
+                        </field>
+
+                        <field name="title_prefix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_TITLE_PREFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_TITLE_PREFIX_DESC" />
+                        <field name="title_suffix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_TITLE_SUFFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_TITLE_SUFFIX_DESC" />
+                        <field name="description_prefix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_PREFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_PREFIX_DESC" />
+                        <field name="description_suffix" type="text" label="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_SUFFIX_LABEL" description="PLG_SYSTEM_KSMETA_FIELD_DESCRIPTION_SUFFIX_DESC" />
+                    </form>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
