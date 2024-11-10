@@ -21,7 +21,7 @@ use Joomla\Component\Content\Administrator\Extension\ContentComponent;
 /**
  * Ks Meta plugin
  *
- * @since  1.0.3
+ * @since  1.0.4
  */
 class KsMeta extends CMSPlugin implements SubscriberInterface
 {
@@ -29,7 +29,7 @@ class KsMeta extends CMSPlugin implements SubscriberInterface
      * Load the language file on instantiation
      *
      * @var    boolean
-     * @since  1.0.3
+     * @since  1.0.4
      */
     protected $autoloadLanguage = true;
 
@@ -38,7 +38,7 @@ class KsMeta extends CMSPlugin implements SubscriberInterface
      *
      * @return  array
      *
-     * @since   1.0.3
+     * @since   1.0.4
      */
     public static function getSubscribedEvents(): array
     {
@@ -69,7 +69,7 @@ class KsMeta extends CMSPlugin implements SubscriberInterface
      *
      * @return  void
      *
-     * @since   1.0.3
+     * @since   1.0.4
      */
     public function onBeforeCompileHead(): void
     {
@@ -97,6 +97,7 @@ class KsMeta extends CMSPlugin implements SubscriberInterface
             foreach ($articles_params as $params) {
                 $params = new Registry($params);
                 $catids = $params->get('catid');
+                $articles->setState('filter.category_id.include', (bool) $params->get('category_filtering_type', 1));
 
                 if ($catids) {
                     if ($params->get('show_child_category_articles', 0) && (int) $params->get('levels', 0) > 0) {
