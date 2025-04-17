@@ -21,7 +21,7 @@ use Joomla\Component\Content\Administrator\Extension\ContentComponent;
 /**
  * Ks Meta plugin
  *
- * @since  1.0.6
+ * @since  1.0.7
  */
 class KsMeta extends CMSPlugin implements SubscriberInterface
 {
@@ -29,7 +29,7 @@ class KsMeta extends CMSPlugin implements SubscriberInterface
      * Load the language file on instantiation
      *
      * @var    boolean
-     * @since  1.0.6
+     * @since  1.0.7
      */
     protected $autoloadLanguage = true;
 
@@ -38,7 +38,7 @@ class KsMeta extends CMSPlugin implements SubscriberInterface
      *
      * @return  array
      *
-     * @since   1.0.6
+     * @since   1.0.7
      */
     public static function getSubscribedEvents(): array
     {
@@ -69,7 +69,7 @@ class KsMeta extends CMSPlugin implements SubscriberInterface
      *
      * @return  void
      *
-     * @since   1.0.6
+     * @since   1.0.7
      */
     public function onBeforeCompileHead(): void
     {

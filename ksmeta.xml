@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>mediafoks@gmail.com</authorEmail>
     <authorUrl></authorUrl>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <description>PLG_SYSTEM_KSMETA_XML_DESCRIPTION</description>
     <namespace path="src">Joomla\Plugin\System\KsMeta</namespace>
     <files>
@@ -74,7 +74,7 @@
                             <option value="1">PLG_SYSTEM_KSMETA_OPTION_INCLUDE_VALUE</option>
                         </field>
 
-                        <field name="levels" type="number" label="PLG_SYSTEM_KSMETA_FIELD_CATDEPTH_LABEL" default="1" filter="integer" showon="show_child_category_articles:1" />
+                        <field name="levels" type="number" label="PLG_SYSTEM_KSMETA_FIELD_CAT_DEPTH_LABEL" default="1" filter="integer" showon="show_child_category_articles:1" />
 
                         <field name="ex_or_include_categories" type="list" label="PLG_SYSTEM_KSMETA_FIELD_EX_OR_INCLUDE_CATEGORIES_LABEL" default="0" filter="integer">
                             <option value="0">PLG_SYSTEM_KSMETA_OPTION_EXCLUDE_VALUE</option>
